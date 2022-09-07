@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400&family=Saira+Stencil+One&display=swap");
+
+body,
+html,
+.root {
+    width: 100vw;
+    height: 100vh;
+    background-color: #8c11be;
+    
+    font-family: "Raleway", sans-serif;
+}
+
+.sign-in, .sign-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 400px;
+    max-width: 600px;
+    margin: 20vh auto;
+    padding: 0 20px;
+}
+
+.sign-in h1,.sign-up h1 {
+    font-family: "Saira Stencil One", cursive;
+    font-size: 32px;
+    color: white;
+    margin: 0 auto 24px auto;
+}
+
+.sign-in form, .sign-up form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 26px;
+}
+
+.sign-in input , .sign-up input{
+    width: 98%;
+    height: 3vh;
+    margin: 6px auto;
+
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.sign-in input.err , .sign-up input.err{
+    border-color: red;
+}
+
+.sign-in button, .sign-up button {
+    width: 100%;
+    height: 4vh;
+    margin: 16px auto;
+    background: #a328d6;
+    border: none;
+    border-radius: 5px;
+
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #ffffff;
+}
+
+.sign-in footer, .sign-up footer {
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+}
