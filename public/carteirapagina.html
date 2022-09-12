@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyWallet</title>
+    <link rel="icon" type="svg" href="1f4b0.svg">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./../src/components/login/loginPage.css">
+    <link rel="stylesheet" href="transfers.css">
+</head>
+<body>
+    <div class="root">
+        <div class="transfers">
+            <header>
+                <h1>Olá, Fulano</h1>
+                <ion-icon name="log-out-outline"></ion-icon>
+            </header>
+            <div class="container">
+                <div class="noRegistry" style="display:none">
+                    <h1>Não há registros de
+                        entrada ou saída</h1>
+                </div>
+                <ul>
+                    <li>
+                        <h1>11/09</h1>
+                        <h2>Salario</h2>
+                        <h3 class="red">5000.00</h3>
+                    </li>
+                    <li>
+                        <h1>11/09</h1>
+                        <h2>Salario</h2>
+                        <h3 class="green">5000.00</h3>
+                    </li>                    
+                </ul>       
+                <div class="amount">
+                    <h2>Saldo</h2>
+                    <h3 class="green">5000,00</h3>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="entry">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <p>Nova entrada</p>
+                </button>
+                <button class="exit">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <p>Nova saida</p>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

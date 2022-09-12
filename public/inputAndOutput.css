@@ -1,0 +1,27 @@
+.inputAndOutput{
+    height: 50vh;
+    max-width: 600px;
+    margin: 2vh auto;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    width: 100%;
+    height: 3vh;
+    margin: 6px auto;
+
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.inputAndOutput button {
+    margin-top: 20px;
+    width: 100%;
+    height: 4vh;
+}

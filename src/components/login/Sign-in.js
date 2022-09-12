@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-import { postSignIn } from '../dataService';
+import { getAccount, postSignIn } from '../Data/dataService';
+import userContext from '../Data/userContext';
 import './loginPage.css'
 
 
@@ -13,20 +14,27 @@ export default function SignIn(){
     const [password, setPassword] = useState('')
     const [err, setErr] = useState(false)
     const [unauthorized ,setUnAuthorized] = useState(false)
-    
+    const {setAuthorization} = useContext(userContext)
+    const {setUserData} = useContext(userContext)
 
    async function handleForm (e){
         e.preventDefault()
         if(password.length<8) return setErr(true)
-        const post = await postSignIn({
-            email,
-            password,
-        }).then(console.log('tudo certo'))
-        .catch((err)=>{
-            if(err.response.status === 401) {setErr(true); setUnAuthorized(true);}
-            if(err.response.status === 400) setErr(true)
-        })
-        
+
+        try {
+            const response = await postSignIn({
+                email,
+                password,
+            })
+            setUserData(response.data)
+            setAuthorization(true)
+            localStorage.setItem('token', response.data.token)
+            navigate(`/private/accounts/${response.data.userId}`)
+        } catch (error) {
+            console.error(error)
+            if(error.response.status === 401) {setErr(true); setUnAuthorized(true);}
+            if(error.response.status === 400) setErr(true)
+        }   
     }
 
     return(
@@ -56,7 +64,7 @@ export default function SignIn(){
                 {unauthorized? <p>O email ou a senha está incorreto</p> : ''}
                 <button>Entrar</button>
             </form>
-            <footer onClick={()=>navigate('/sing-up')}>Primeira vez? Cadastre-se!</footer>
+            <footer onClick={()=>navigate('/sign-up')}>Primeira vez? Cadastre-se!</footer>
         </div>
     )
 }

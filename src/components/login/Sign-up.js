@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { postSignUP } from '../dataService';
+import { postSignUP } from '../Data/dataService';
 import './loginPage.css'
 
 
@@ -12,22 +12,25 @@ export default function SignUp(){
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     const [err, setErr] = useState(false)
-    const [unauthorized ,setUnAuthorized] = useState(false)
+    const [conflict ,setConflict] = useState(false)
+    const [server, setServer] = useState(false)
 
     async function handleForm (e){
         e.preventDefault()
-        if(password !== confirmPass){
-            console.log(password, confirmPass)
-            return setErr(true)
+        if(password !== confirmPass)return setErr(true)
+        try {
+            await postSignUP({
+                name,
+                email,
+                password,
+            })
+            navigate('/sign-in')
+        } catch (error) {
+            console.log(error.response.status)
+            if(error.response.status === 400) {setErr(true);}
+            if(error.response.status === 409) setConflict(true)
+            if(error.response.status === 500) setServer(true)
         }
-        const post = await postSignUP({
-            name,
-            email,
-            password,
-        })
-        if(post.status === 200) console.log('tudo certo')
-        if(post.status === 400) {setErr(true);}
-        if(post.status === 409) setUnAuthorized(true)
     }
 
     return(
@@ -54,6 +57,7 @@ export default function SignUp(){
                 type="password" 
                 placeholder="Senha" 
                 required
+                className={err ? 'err':''}
                 value={password}
                 onChange={(e)=> setPassword(e.target.value)}/>
 
@@ -65,10 +69,11 @@ export default function SignUp(){
                 value={confirmPass}
                 onChange={(e)=> setConfirmPass(e.target.value)}
                 />
-                {unauthorized? <p>O email ja foi cadastrado</p> : ''}
+                {conflict? <p>O email já foi cadastrado</p> : ''}
+                {server? <p>O servidor esta fora de área</p> : ''}
                 <button>Cadastrar</button>
             </form>
-            <footer onClick={()=>navigate('/sing-in')}>Já tem uma conta? Entre agora!</footer>
+            <footer onClick={()=>navigate('/sign-in')}>Já tem uma conta? Entre agora!</footer>
         </div>
     )
 }
