@@ -13,12 +13,11 @@ export default function InputTransfer (){
         e.preventDefault();
         
         try {
-            const response = await postTransferenceAccount(userId, {
+            await postTransferenceAccount(userId, {
                 value,
                 description,
                 type: 'input'
             })
-            console.log(response)
             navigate(`/private/accounts/${userId}`)
         } catch (error) {
             console.error(error)
